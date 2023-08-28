@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-//Selection Sort 
+//Selection Sort (Ques 32)
 void selectionSort(int arr[],int n) {
     // Write your code here.
     for(int i=0;i<=n-1;i++)
@@ -22,7 +22,7 @@ void selectionSort(int arr[],int n) {
     cout << "\n";
 }
 
-//Bubble Sort
+//Bubble Sort (Ques 33)
 //first method of Bubble Sort
 void bubble_sort(int arr[], int n) {
     // bubble sort
@@ -58,7 +58,7 @@ void bubble_sort1(int arr[], int n) {
     cout << "\n";
 }
 
-//Insertion Sort
+//Insertion Sort (Ques 34)
 void insertion_sort(int arr[], int n) {
     for (int i = 0; i <= n - 1; i++) {
         int j = i;
@@ -75,7 +75,7 @@ void insertion_sort(int arr[], int n) {
     cout << "\n";
 }
 
-//Merge Sort
+//Merge Sort (Ques 35)
 void merge(vector<int>& arr, int l,int mid,int r)
 {
     int left=l;
@@ -121,7 +121,7 @@ void mergeSort(vector<int>& arr, int l, int r) {
     mergeSort(arr,l,mid);
     mergeSort(arr,mid+1,r);
 }
-//Recursive Bubble Sort
+//Recursive Bubble Sort (Ques 36)
 void bubble_sort(int arr[], int n) {
     // Base Case: range == 1.
     if (n == 1) return;
@@ -134,7 +134,7 @@ void bubble_sort(int arr[], int n) {
         }
     }
 }
-//Recursive Insertion Sort
+//Recursive Insertion Sort (Ques 37)
 void insert(int arr[], int i,int n)
     {
         //code here
@@ -150,7 +150,7 @@ void insert(int arr[], int i,int n)
         insert(arr,i+1,n);
     }
 
-//Quick Sort
+//Quick Sort (Ques 38)
 int partitionArray(int arr[], int start, int end) {
 
   int pivot=arr[start];
