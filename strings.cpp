@@ -3,51 +3,51 @@ using namespace std;
 
 //Remove Outermost Paranthesis (Ques 111)
     string removeOuterParentheses(string S) {
-        string res;
-        int opened = 0;
-        for (char c : S) {
-            if (c == '(' && opened++ > 0) res += c;
-            if (c == ')' && opened-- > 1) res += c;
+        string res; //Ek res string leli h jisme store krenge answer ko
+        int opened = 0; //Ye isilie lia h jisse ye dekh ske ki outside paranthesis available h ya nii
+        for (char c : S) { //Loop chalaya S me c se 
+            if (c == '(' && opened++ > 0) res += c; //check kro ki kya c ( h..agr h and opened ko ek bdhakr check kro ki kya vo 0 se bda h..agr dono h to res me vo character daaldo..varna rhne do..bcoz phir vo open ya closing paranthesis me aa jaega 
+            if (c == ')' && opened-- > 1) res += c;//same cheez yha ki h..check kia h aur phir opened ko dekha h ki kya vo 1 se bda h ki chota//agr  bda h to character to res me daaldo.
         }
-        return res;
+        return res; //res to return krado
     }
 
 //Reverse words in a given string/Palindrome check (Ques 112)
 string reverseWords(string s) {
     int n=s.size();  
   int i=0;
-  int l=0,r=0;
-  reverse(s.begin(),s.end());
-  while(i<n)
+  int l=0,r=0; //Ye two pointer approach h..jisme humne ek l lia h aur ek r lia h
+  reverse(s.begin(),s.end()); //sbse pehle poori string ko reverse krdo..
+  while(i<n) // phir loop chalao aur i ko dekhte chalo
   {
-    while(i<n && s[i]!=' ')
+    while(i<n && s[i]!=' ') //jha bhi s[i] space mil jae..vhi pr i ko rokdo aur r me i ko daldo..
     {
       s[r++]=s[i++];
     }
-    if(l<r)
+    if(l<r)//ab jha bhi ruke ho r ko lekr vha tk l se jo ki abhi kisi word ke starting me hoga..
     {
-      reverse(s.begin()+l,s.begin()+r);
-      s[r]=' ';
-      r++;
-      l=r;
+      reverse(s.begin()+l,s.begin()+r);//l se lekr r-1 tk poora reverse krdo
+      s[r]=' ';//ab jha bhi r h vha pr ek space dedo..bcoz agr ek se jyada space hui to ek hi space rhe..
+      r++;//ab r ko aage bdha do
+      l=r;//aur l ko next word ki starting me le aao
     }
-    i++;
+    i++;//i ko bdhate rho jisse vo check krta rhe..ki space kha kha h string me
   }
-  string str=s.substr(0,r-1);
+  string str=s.substr(0,r-1); //jb poora string bnkr aaega to usme ek space last me bachi rhegi to usko htane ke lie..0 se r-1 tk substring lelo..
   return str;
 }
 
 //Largest odd number in a string (Ques 113)
-string largestOddNumber(string num) {
-    for (int i = num.size() - 1; i >= 0; --i)
-        if ((num[i] - '0') % 2)
-            return num.substr(0, i + 1);
-    return string();
+string largestOddNumber(string num) { //odd number 2 se divisible nii hota h
+    for (int i = num.size() - 1; i >= 0; --i) //yha string ke peeche se loop chala dia h..jisse last to last character check krte jae..
+        if ((num[i] - '0') % 2)//character ko uski ASCII value se check kia kya vo 2 se divisible h..agr h to poora string Odd hoga
+            return num.substr(0, i + 1); 
+    return string();//varna ek khali string return krdo
 }
 
 //Longest common prefix (Ques 114)
 string commonPrefix(vector<string>& arr,int n){
-  string res="";
+  string res=""; 
   sort(arr.begin(),arr.end());
   string first=arr[0];
   string last=arr[n-1];
