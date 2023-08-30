@@ -116,6 +116,213 @@ bool areKAnagrams(string str1, string str2, int k) { //Anagram mtlb characters k
         return (cnt<=k)?true:false; //ab check krlo 
     }
 
+//Sort Characters by Frequency (Ques 118)
+
+string sortByFrequency(int n, string& s)
+{
+    unordered_map<char,int> mp;
+    priority_queue<pair<int,char>> pq;
+    string res="";
+    for(char c:s)
+    {
+        mp[c]++;
+    }
+    for(auto it:mp)
+    {
+        pq.push({it.second,it.first});
+    }
+    while(!pq.empty())
+    {
+        auto temp=pq.top();
+        int freq=temp.first;
+        char c=temp.second;
+        res+=string(freq,c);
+        pq.pop();
+    }
+    return res;
+}
+
+//Maximum Nesting Depth of Paranthesis (Ques 119)
+
+ int maxDepth(string s) {
+    int ans=0;
+  int maxans = INT_MIN;
+  for(int i=0;i<s.size();i++)
+  {
+    if(s[i]=='(')
+    ans++;
+    else if(s[i]==')')
+    ans--;
+
+    maxans= max(ans,maxans);
+  }
+  return maxans; 
+    }
+
+//Roman Number to Integer and vice versa (Ques 120)
+
+  int romanToInt(string s) {
+        map<char,int> mp;
+        mp.insert(make_pair('I',1));
+        mp.insert(make_pair('V',5));
+        mp.insert(make_pair('X',10));
+        mp.insert(make_pair('L',50));
+        mp.insert(make_pair('C',100));
+        mp.insert(make_pair('D',500));
+        mp.insert(make_pair('M',1000));
+        int len=s.size(),num,sum=0;
+        for(int i=0;i<len;)
+        {
+            if(i==(len-1) or mp[s[i]]>=mp[s[i+1]])
+            {
+                num=mp[s[i]]; 
+                i++;
+            }
+            else {
+                num=mp[s[i+1]]-mp[s[i]];
+                i=i+2;
+            }
+            sum+=num;
+        }
+        return sum;
+    }
+    
+//Implement Atoi (Ques 121)
+
+int myAtoi(string s) {
+    string str=s;
+    int sign = 1, base = 0, i = 0;
+ 
+    // if whitespaces then ignore.
+    while (str[i] == ' ') {
+        i++;
+    }
+
+     if (str[i] == '-' || str[i] == '+') {
+        sign = 1 - 2 * (str[i++] == '-');
+    }
+ 
+    // checking for valid input
+    while (str[i] >= '0' && str[i] <= '9') {
+        // handling overflow test case
+        if (base > INT_MAX / 10
+            || (base == INT_MAX / 10 && str[i] - '0' > 7)) {
+            if (sign == 1)
+                return INT_MAX;
+            else
+                return INT_MIN;
+        }
+        base = 10 * base + (str[i++] - '0');
+    }
+    return base * sign;
+    }
+
+//Count No. of Substrings (Ques 122)
+
+int countSubStrings(string str, int k) 
+{
+    // Write your code here.
+    int n = str.length();
+ 
+    // Initialize result
+    int res = 0;
+ 
+    // To store count of characters from 'a' to 'z'
+    int cnt[26];
+ 
+    // Consider all substrings beginning with
+    // str[i]
+    for (int i = 0; i < n; i++)
+    {
+        int dist_count = 0;
+ 
+        // Initializing array with 0
+        memset(cnt, 0, sizeof(cnt));
+ 
+        // Consider all substrings between str[i..j]
+        for (int j=i; j<n; j++)
+        {
+            // If this is a new character for this
+            // substring, increment dist_count.
+            if (cnt[str[j] - 'a'] == 0)
+                dist_count++;
+ 
+            // Increment count of current character
+            cnt[str[j] - 'a']++;
+ 
+            // If distinct character count becomes k,
+            // then increment result.
+            if (dist_count == k)
+                res++;
+            if(dist_count > k) break;
+        }
+    }
+    return res;
+}
+
+//Longest Palindromic Substring[Without DP] (Ques 123)
+
+bool check(string &s, int i, int j){
+        while(i<j){
+            if(s[i] != s[j]){
+                return false;
+            }
+            i++;
+            j--;
+        }
+        return true;
+    }
+    string longestPalindrome(string s) {
+        int n = s.size();
+        vector<string> substring;
+        for(int i=0; i<n; i++){
+            string temp = "";
+            for(int j=i; j<n; j++){
+                temp += s[j];
+                substring.push_back(temp);
+            }
+        }
+        int max_len = 0;
+        string finalans = substring[0];
+        int m = substring.size();
+        for(int i=0; i<m; i++){
+            int s = substring[i].size();
+            if(check(substring[i], 0, s-1)){
+                if(s > max_len){
+                    max_len = s;
+                    finalans = substring[i];
+                }
+            }       
+        }
+        return finalans;
+    }
+
+//Reverse Every Word in a string (Ques 125)
+
+string reverseWords(string s) {
+int n=s.size();  
+  int i=0;
+  int l=0,r=0;
+  reverse(s.begin(),s.end());
+  while(i<n)
+  {
+    while(i<n && s[i]!=' ')
+    {
+      s[r++]=s[i++];
+    }
+    if(l<r)
+    {
+      reverse(s.begin()+l,s.begin()+r);
+      s[r]=' ';
+      r++;
+      l=r;
+    }
+    i++;
+  }
+  string str=s.substr(0,r-1);
+  return str;
+}
+
 
 int main()
 {
